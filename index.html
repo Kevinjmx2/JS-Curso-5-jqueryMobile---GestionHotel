@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+   <head>
+    <meta name="viewport" content="width = device-width, initial-scale=1" charset="utf-8">
+
+    <link rel="stylesheet" href="js/jqmb/jquery.mobile-1.4.5.css">
+
+    <style type="text/css">
+        
+        
+        #datos{
+            border: 2px solid #0F499D;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: aliceblue;
+            box-shadow: 3px -5px 5px 3px grey;
+        }
+
+            
+        #header{
+            height: 100px;
+            vertical-align: middle;
+        }
+        #btnPagiRegistrar, #btnlistaHotelesPI{
+            margin-top: 15px;
+            
+
+        }
+    
+        #titulo {
+            padding-top: 40px;
+        }
+             
+       
+        #paginaInicio, #paginaRegistro, #paginaListaHoteles, #paginagHotel{
+            background-color: floralwhite;
+        }
+            
+        
+        
+        
+    #divMapaRegistro, #divMapaHotel {
+        width: 100%;
+        height: 400px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    </style>
+
+
+    <script src="js/jquery/jquery.js"></script>
+    <script src="js/jqmb/jquery.mobile-1.4.5.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=KEYAPY&callback=initMap" type="text/javascript"></script>  **** En APIKEY Colocar la llave de tu api de GoogleMaps***** -->
+    <script src="js/EvaluacionFinalM5.js"></script> 
+
+    
+    
+    </head>
+    <body >
+	<div data-role="page" id="paginaInicio">
+	
+		<div data-role="header" id="header">
+		    <h2 id="titulo">Gestión Hotel</h2>
+        </div>
+        
+		<div data-role="content"  class="ui-content">
+			<a id="btnPagiRegistrar" data-role="button">Registro Hotel</a>
+			<a id="btnlistaHotelesPI" data-role="button">Lista Hoteles</a>
+		</div>
+		
+        <div data-role="footer" id="footer">
+           <h4>Gestión Hotel</h4>
+            <div style="text-align: center; width: 100%;">
+                
+                <table style="width: 100%;">
+                    <tbody><tr>
+                       <td>
+                            <a href="" target="_blank" class="ui-link">
+                                <img src="img/LogoFB.png" alt="Facebook" style="height:40px;">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="" target="_blank" class="ui-link">
+                                <img src="img/Logotw.png"  alt="Twitter" style="height:40px;">
+                            </a>
+                        </td>
+
+                        <td>
+                            <a href="" target="_blank" class="ui-link">
+                                <img src="img/LogoIntg.png" alt="Instagram" style="height:40px;">
+                            </a>
+                        </td>
+                        
+                        
+                        <td>
+                            <a href="" class="ui-link">
+                                <img src="img/logoWhpp.png" alt="Chatea Con Soporte" style="height:40px;">
+                            </a>
+                        </td>
+                    </tr>
+                </tbody></table>
+            </div>
+            <div style="text-align: center; font-size: x-small; margin-bottom: 5px;">
+                <p>KM Desing</p>
+            </div>
+        </div>
+	</div>
+	
+	
+	
+	<div data-role="page" id="paginaRegistro">
+	
+		<div data-role="header">
+		    <h2>Registro de Hotel</h2>
+        </div>
+        
+		<div data-role="content" class="ui-content">
+		
+			<label for="Nombre">Nombre:</label>
+			<input type="text" id="Nombre" name="Nombre"  required placeholder="Escriba el nombre del hotel.">
+			<hr/>
+			
+			<label>Ubicación:</label>
+			<div id="divMapaRegistro">
+			</div>
+            <div>
+			<label for="Ciudad">Ciudad:</label>
+			<input type="text" id="Ciudad" name="Ciudad" required placeholder="Escriba la ciudad del hotel."></div>
+			<hr/>
+			
+			<label for="Telefono">Teléfono:</label>
+			<input type="text" id="Telefono" name="Telefono" placeholder="Escriba teléfono del hotel.">
+			<hr/>
+			
+			<label for="Estrellas">Estrellas:</label>
+			<input type="number" id="Estrellas" name="Estrellas"  required min="1" max="5" placeholder="Escriba # de estrellas.">
+			<hr/>
+						
+			<a id="btnRegistrar" data-role="button">Registrar Hotel</a>
+			<a id="btnPaginaInicioPR" data-role="button">Volver</a>
+		</div>
+		
+		<div data-role="footer"></div>
+	</div>
+	
+	
+	
+	
+	<div data-role="page" id="paginaListaHoteles">
+           <div data-role="header">
+               <h2>Lista Hoteles</h2>
+            </div>
+        
+		<div data-role="content" class="ui-content">
+			<ul data-role="listview" id="listaHoteles">
+			</ul>
+		</div>
+		<a id="btnAgregarHotelPLH" data-role="button">Añadir Hotel a la Lista</a>
+        <a id="btnPaginaInicioPLH" data-role="button">Volver</a>
+	</div>
+	
+	
+	
+	
+	<div data-role="page" id="paginagHotel">
+		<div data-role="header"><h2>Datos Hotel</h2></div>
+		<div data-role="content" class="ui-content">
+            <br/>
+            <div  id="datos">
+                <strong>Nombre:</strong>&nbsp;<span id="NombreH">[nombre]</span><br/>
+                <strong>Direccion:</strong>&nbsp;<span id="CiudadH">[ciudad]</span><br/>
+                <strong>Teléfono:</strong>&nbsp;<span id="TelefonoH">[telefono]</span><br/>
+                <strong>Estrellas:</strong>&nbsp;<span id="EstrellasH">[estrellas]</span><bR/><br/>
+                <strong>Ubicación :</strong><br/><div id="divMapaHotel"></div>
+            </div>
+			
+			<a id="btnDelete" data-role="button" class="ui-btn ui-btn-b ui-icon-delete ui-btn-icon-left">Eliminar Hotel</a>
+			<a id="btnlistaHotelesPH" data-role="button">Lista Hoteles</a>
+			<a id="btnPaginaInicioPH" data-role="button">Volver al Inicio</a>
+		</div>
+	</div>
+</body>
+</html>
